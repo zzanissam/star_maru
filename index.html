@@ -438,7 +438,6 @@
 
       <div class="sidebar-content">
         
-        <!-- 1. 달 선택 탭 -->
         <div id="side-month" style="display: block;">
           <div class="section-title">관측 레이어 선택</div>
           <div class="sidebar-layer-bar">
@@ -451,7 +450,6 @@
           <div class="month-grid" id="month-grid"></div>
         </div>
 
-        <!-- 2. 탄생별자리 탭 -->
         <div id="side-zodiac" style="display: none;">
           <div class="section-title">🎂 나의 탄생 별자리 관측 가이드</div>
           <p style="font-size:0.85rem; color:var(--text-sub); margin-bottom:12px;">생일을 선택하면 내 별자리가 밤에 가장 선명하게 보이는 6개월 뒤 관측 시기를 안내합니다!</p>
@@ -478,7 +476,6 @@
           </div>
         </div>
 
-        <!-- 3. 전설 읽기 전용 탭 -->
         <div id="side-legend" style="display: none;">
           <div class="section-title">📖 황도 12궁 별자리 전설</div>
           <p style="font-size:0.85rem; color:var(--text-sub); margin-bottom:12px;">별자리를 선택하면 신화와 전설 이야기를 확인할 수 있습니다.</p>
@@ -494,13 +491,11 @@
           </div>
         </div>
 
-        <!-- 4. 검색 탭 -->
         <div id="side-search" style="display: none;">
           <input type="text" class="search-input" id="search-input" placeholder="🔎 화성, 목성, 오리온자리..." oninput="filterSearch()">
           <div id="search-results"></div>
         </div>
 
-        <!-- 5. 원리 공부 탭 -->
         <div id="side-study" style="display: none;">
           <div class="search-card" style="border-color:var(--accent-blue);">
             <h4>♀️ 밤 22시 조건과 금성 관측</h4>
@@ -519,7 +514,6 @@
       </div>
     </div>
 
-    <!-- 중앙 밤하늘 관측 뷰포트 -->
     <div class="main-viewport" id="main-viewport">
       
       <div id="sky-image-container"></div>
@@ -550,7 +544,7 @@
       { year: 2027, month: 7, mainStar: '여름철 대삼각형, 염소자리 알파 유성우', desc: '동쪽 하늘 중앙의 웅장한 여름철 대삼각형 아래로 유성우와 가을 별자리들이 조화를 이룹니다.' }
     ];
 
-    // 황도 12궁 정식 전설 데이터베이스 탑재
+    /* admin.html에서 전설 수정 후 [배포용 코드 복사]로 추출한 배열을 아래 위치에 붙여넣으시면 배포 사이트에 반영됩니다. */
     const zodiacList = [
       { name: "양자리 ♈", dateRange: "3월 21일 ~ 4월 19일", bestMonthIdx: 2, bestMonthText: "2026년 10월", skyDirection: "남쪽 높은 하늘", desc: "생일인 봄철 대신 가을 밤 22시경 남쪽 높은 하늘에서 빛납니다.", legend: "계모의 구박을 받던 헬레와 프릭소스 남매를 구하기 위해 제우스가 보낸 황금 털을 가진 날개 달린 양의 신화입니다." },
       { name: "황소자리 ♉", dateRange: "4월 20일 ~ 5월 20일", bestMonthIdx: 3, bestMonthText: "2026년 11월", skyDirection: "동쪽~남동쪽 하늘", desc: "생일에서 6개월 뒤인 11월 밤, 알데바란과 플레이아데스 성단이 또렷합니다.", legend: "신들의 왕 제우스가 아름다운 공주 에우로파에게 반해 흰 황소로 변신하여 바다를 건넌 사랑의 이야기입니다." },
