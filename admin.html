@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>별마루⭐ - 충청 지역 별자리 관찰 웹사이트</title>
+  <title>별마루⭐ - [관리자용] 전설 & 이미지 관리자</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -33,996 +33,129 @@
       overflow: hidden !important;
     }
 
-    body {
-      display: flex;
-      flex-direction: column;
-    }
+    body { display: flex; flex-direction: column; }
 
     header {
-      width: 100%;
-      height: 60px;
-      padding: 0 24px;
-      background: #0a0e1a !important;
-      border-bottom: 1px solid var(--border-color);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 20;
-      flex-shrink: 0;
-      box-sizing: border-box;
+      width: 100%; height: 60px; padding: 0 24px;
+      background: #0a0e1a !important; border-bottom: 1px solid var(--border-color);
+      display: flex; justify-content: space-between; align-items: center;
+      z-index: 20; flex-shrink: 0; box-sizing: border-box;
     }
 
-    .logo h1 {
-      font-size: 1.4rem;
-      font-weight: 900;
-      color: var(--accent-yellow);
-      margin: 0;
-    }
+    .logo h1 { font-size: 1.4rem; font-weight: 900; color: var(--accent-yellow); margin: 0; }
+    .copyright-badge { font-size: 0.82rem; color: var(--accent-yellow); background: rgba(255, 209, 102, 0.1); padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(255, 209, 102, 0.3); font-weight: 600; }
 
-    /* 상단 우측 정보 배치용 영역 */
-    .header-info-group {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    .app-body { flex: 1; width: 100%; height: calc(100vh - 60px); display: flex; position: relative; overflow: hidden; background: #000000 !important; }
+    .sidebar { width: 380px; height: 100%; background: var(--panel-bg); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; z-index: 10; backdrop-filter: blur(10px); flex-shrink: 0; }
+    .sidebar-content { flex: 1; padding: 20px; overflow-y: auto; }
+    .section-title { font-size: 1.05rem; color: var(--accent-yellow); margin-bottom: 10px; margin-top: 15px; font-weight: 800; }
+    
+    .legend-form select, .legend-form textarea {
+      width: 100%; padding: 10px; margin-top: 8px; background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-family: inherit; box-sizing: border-box; outline: none;
     }
+    .legend-form textarea { height: 120px; resize: vertical; }
 
-    /* 제작자 저작권 표시 뱃지 */
-    .copyright-badge {
-      font-size: 0.82rem;
-      color: var(--accent-yellow);
-      background: rgba(255, 209, 102, 0.1);
-      padding: 6px 14px;
-      border-radius: 20px;
-      border: 1px solid rgba(255, 209, 102, 0.3);
-      font-weight: 600;
-    }
-
-    .location-badge {
-      font-size: 0.82rem;
-      color: var(--accent-blue);
-      background: rgba(76, 201, 240, 0.1);
-      padding: 6px 14px;
-      border-radius: 20px;
-      border: 1px solid rgba(76, 201, 240, 0.3);
-      font-weight: 600;
-    }
-
-    .app-body {
-      flex: 1;
-      width: 100%;
-      height: calc(100vh - 60px);
-      display: flex;
-      position: relative;
-      overflow: hidden;
-      background: #000000 !important;
-    }
-
-    .sidebar {
-      width: 380px;
-      height: 100%;
-      background: var(--panel-bg);
-      border-right: 1px solid var(--border-color);
-      display: flex;
-      flex-direction: column;
-      z-index: 10;
-      backdrop-filter: blur(10px);
-      flex-shrink: 0;
-    }
-
-    .sidebar-tabs {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .tab-btn {
-      padding: 12px 0;
-      background: transparent;
-      border: none;
-      color: var(--text-sub);
-      font-size: 0.78rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-      text-align: center;
-    }
-
-    .tab-btn.active {
-      color: var(--accent-yellow);
-      border-bottom: 3px solid var(--accent-yellow);
-      background: rgba(255, 209, 102, 0.05);
-    }
-
-    .sidebar-content {
-      flex: 1;
-      padding: 20px;
-      overflow-y: auto;
-    }
-
-    .section-title {
-      font-size: 1.05rem;
-      color: var(--accent-yellow);
-      margin-bottom: 10px;
-      margin-top: 15px;
-      font-weight: 800;
-    }
-
-    .section-title:first-child {
-      margin-top: 0;
-    }
-
-    .sidebar-layer-bar {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-      background: rgba(10, 14, 26, 0.5);
-      padding: 6px;
-      border-radius: 12px;
-      border: 1px solid var(--border-color);
-      margin-bottom: 16px;
-      backdrop-filter: blur(6px);
-    }
-
-    .sidebar-layer-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-sub);
-      padding: 8px 0;
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 0.78rem;
-      cursor: pointer;
-      transition: all 0.2s;
-      text-align: center;
-    }
-
-    .sidebar-layer-btn.active {
-      background: var(--accent-yellow);
-      color: #000;
-    }
-
-    .month-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-
-    .month-btn {
-      padding: 10px 0;
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 10px;
-      color: #fff;
-      font-weight: bold;
-      font-size: 0.88rem;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .month-btn.selected {
-      background: var(--accent-blue);
-      color: #000;
-      border-color: var(--accent-blue);
-    }
-
-    .upload-box {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 14px;
-      margin-top: 10px;
-    }
-
-    .action-btn {
-      width: 100%;
-      padding: 10px;
-      margin-top: 8px;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 0.85rem;
-    }
-
+    .action-btn { width: 100%; padding: 10px; margin-top: 8px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 0.85rem; }
     .btn-upload { background: var(--accent-yellow); color: #000; }
-    .btn-delete { background: rgba(255, 107, 107, 0.2); border: 1px solid var(--accent-red); color: var(--accent-red); }
+    .btn-copy { background: var(--accent-green); color: #000; }
 
-    .main-viewport {
-      flex: 1;
-      height: 100%;
-      position: relative;
-      background: #000000 !important;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      touch-action: pan-y;
-      user-select: none;
-    }
-
-    #sky-image-container {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #000000 !important;
-      overflow: hidden;
-      margin: 0;
-      padding: 0;
-    }
-
-    .sky-image {
-      width: 100% !important;
-      height: 100% !important;
-      object-fit: contain !important;
-      background: #000000 !important;
-      display: block !important;
-    }
-
-    .no-image-placeholder {
-      text-align: center;
-      color: var(--text-sub);
-    }
-
-    .info-overlay {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      width: 320px;
-      background: rgba(10, 14, 26, 0.50);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 14px;
-      padding: 14px 18px;
-      backdrop-filter: blur(8px);
-      z-index: 5;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-    }
-
-    .info-overlay h3 {
-      color: var(--accent-yellow);
-      font-size: 1.05rem;
-      margin-bottom: 6px;
-      margin-top: 0;
-    }
-
-    .info-overlay p {
-      font-size: 0.88rem;
-      line-height: 1.5;
-      color: var(--text-sub);
-      margin: 0;
-    }
-
-    .legend-form {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 14px;
-      margin-bottom: 16px;
-    }
-
-    .legend-form select, 
-    .legend-form input, 
-    .legend-form textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 8px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      color: #fff;
-      font-family: inherit;
-      box-sizing: border-box;
-      outline: none;
-    }
-
-    .legend-form textarea {
-      height: 110px;
-      resize: vertical;
-    }
-
-    .legend-card {
-      background: rgba(255, 209, 102, 0.08);
-      border: 1px solid var(--accent-yellow);
-      border-radius: 12px;
-      padding: 14px;
-      margin-top: 10px;
-    }
-
-    .legend-card h4 {
-      color: var(--accent-yellow);
-      margin: 0 0 6px 0;
-      font-size: 1rem;
-    }
-
-    .legend-card p {
-      font-size: 0.85rem;
-      color: var(--text-sub);
-      line-height: 1.6;
-      margin: 0;
-      white-space: pre-wrap;
-    }
-
-    .search-input {
-      width: 100%;
-      padding: 12px 16px;
-      border-radius: 20px;
-      border: 2px solid var(--accent-blue);
-      background: rgba(15, 23, 42, 0.9);
-      color: #fff;
-      outline: none;
-      margin-bottom: 16px;
-      box-sizing: border-box;
-    }
-
-    .search-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 14px;
-      margin-bottom: 10px;
-      cursor: pointer;
-    }
-
-    .search-card h4 { color: var(--accent-yellow); margin-bottom: 4px; margin-top: 0; }
-    .search-card p { font-size: 0.85rem; color: var(--text-sub); line-height: 1.4; margin: 0; }
-    .search-card .tag { display: inline-block; margin-top: 6px; font-size: 0.78rem; color: var(--accent-green); font-weight: bold; }
-
-    .zodiac-select-box {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-
-    .zodiac-select-box select {
-      flex: 1;
-      padding: 10px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid var(--accent-blue);
-      border-radius: 10px;
-      color: #fff;
-      font-weight: bold;
-      outline: none;
-    }
-
-    .zodiac-select-box select option {
-      background: #0f172a;
-      color: #fff;
-    }
-
-    .zodiac-result-card {
-      background: rgba(76, 201, 240, 0.08);
-      border: 1px solid var(--accent-blue);
-      border-radius: 14px;
-      padding: 16px;
-      margin-bottom: 16px;
-    }
-
-    .zodiac-result-card h3 {
-      color: var(--accent-yellow);
-      font-size: 1.2rem;
-      margin-bottom: 6px;
-      margin-top: 0;
-    }
-
-    .zodiac-date-tag {
-      font-size: 0.82rem;
-      color: var(--accent-green);
-      font-weight: bold;
-      margin-bottom: 10px;
-      display: block;
-    }
-
-    .zodiac-obs-info {
-      background: rgba(0, 0, 0, 0.4);
-      padding: 10px 12px;
-      border-radius: 10px;
-      margin: 10px 0;
-      font-size: 0.88rem;
-      line-height: 1.5;
-      color: var(--text-main);
-    }
-
-    .reason-box {
-      background: rgba(255, 107, 107, 0.1);
-      border: 1px dashed var(--accent-red);
-      border-radius: 12px;
-      padding: 14px;
-      margin-top: 14px;
-    }
-
-    .reason-box h4 {
-      color: var(--accent-red);
-      font-size: 0.95rem;
-      margin-bottom: 6px;
-      margin-top: 0;
-    }
-
-    .reason-box p {
-      font-size: 0.85rem;
-      line-height: 1.5;
-      color: #e2e8f0;
-      margin: 0;
-    }
+    .main-viewport { flex: 1; height: 100%; padding: 20px; box-sizing: border-box; overflow-y: auto; background: #050811 !important; }
+    .code-output-box { width: 100%; height: 350px; background: #0f172a; border: 1px solid var(--accent-blue); border-radius: 12px; padding: 16px; color: #4cc9f0; font-family: monospace; font-size: 0.85rem; box-sizing: border-box; white-space: pre-wrap; word-break: break-all; overflow-y: auto; }
   </style>
 </head>
 <body>
 
   <header>
     <div class="logo">
-      <h1>별마루⭐ <span style="font-size:0.9rem; color:#aaa; font-weight:normal;">| 대전/논산/계룡 지역 관측 가이드</span></h1>
+      <h1>별마루⭐ <span style="font-size:0.9rem; color:var(--accent-red); font-weight:normal;">[관리자 편집용]</span></h1>
     </div>
-    
-    <!-- 제작자 및 저작권 정보 상단 추가 -->
-    <div class="header-info-group">
-      <div class="copyright-badge">
-        © 논산계룡교육지원청영재교육원 중2수과통합반 천문팀 (고시은, 박수진, 이채원), 지도교사 윤찬희
-      </div>
-      <div class="location-badge" id="current-time-tag">
-        📍 관측 기준(대전시민천문대): 2026. 08. 15 (22:00)
-      </div>
+    <div class="copyright-badge">
+      🛠️ 전설 내용을 작성한 후 [배포용 코드 복사]를 눌러 index.html에 붙여넣으세요!
     </div>
   </header>
 
   <div class="app-body">
-    
     <div class="sidebar">
-      <div class="sidebar-tabs">
-        <button class="tab-btn active" onclick="switchSidebar('month', event)">📅 달 선택</button>
-        <button class="tab-btn" onclick="switchSidebar('zodiac', event)">🎂 탄생별자리</button>
-        <button class="tab-btn" onclick="switchSidebar('legend', event)">📖 전설</button>
-        <button class="tab-btn" onclick="switchSidebar('search', event)">🔎 찾기</button>
-        <button class="tab-btn" onclick="switchSidebar('study', event)">📚 원리</button>
-      </div>
-
       <div class="sidebar-content">
+        <div class="section-title">📖 황도 12궁 전설 직접 작성하기</div>
+        <p style="font-size:0.83rem; color:var(--text-sub); margin-bottom:12px;">별자리를 선택하고 전설을 작성한 후 저장 버튼을 누르면 배포용 코드가 자동 업데이트됩니다.</p>
         
-        <div id="side-month" style="display: block;">
-          <div class="section-title">관측 레이어 선택</div>
-          <div class="sidebar-layer-bar">
-            <button class="sidebar-layer-btn active" onclick="setLayer('basic', event)">🌌 기본 밤하늘</button>
-            <button class="sidebar-layer-btn" onclick="setLayer('guides', event)">📐 길잡이별</button>
-            <button class="sidebar-layer-btn" onclick="setLayer('zodiac', event)">♈ 황도 12궁</button>
-          </div>
+        <div class="legend-form">
+          <label style="font-size:0.82rem; font-weight:bold; color:var(--accent-yellow);">별자리 선택</label>
+          <select id="zodiac-select" onchange="loadLegend()"></select>
 
-          <div class="section-title">관측 월 선택 (2026-2027)</div>
-          <div class="month-grid" id="month-grid"></div>
+          <label style="font-size:0.82rem; font-weight:bold; color:var(--accent-yellow); margin-top:12px; display:block;">전설 이야기 내용</label>
+          <textarea id="legend-input" placeholder="전설 내용을 입력하세요."></textarea>
 
-          <div class="upload-box">
-            <strong id="upload-label" style="color:var(--accent-yellow); font-size:0.9rem;">📷 스텔라리움 사진 관리</strong>
-            <p id="upload-status" style="font-size:0.8rem; color:var(--text-sub); margin-top:4px;">상태 확인 중...</p>
-            
-            <input type="file" id="file-uploader" accept="image/*" style="display:none;" onchange="uploadCustomImage(event)">
-            <button class="action-btn btn-upload" onclick="document.getElementById('file-uploader').click()">📂 개별 사진 수동 등록</button>
-            <button class="action-btn btn-delete" id="delete-btn" onclick="deleteCustomImage()" style="display:none;">🗑️ 등록 사진 삭제</button>
-          </div>
+          <button class="action-btn btn-upload" onclick="saveLegend()">💾 임시 저장 및 코드 생성</button>
         </div>
-
-        <div id="side-zodiac" style="display: none;">
-          <div class="section-title">🎂 나의 탄생 별자리 관측 가이드</div>
-          <p style="font-size:0.85rem; color:var(--text-sub); margin-bottom:12px;">생일을 선택하면 내 별자리가 밤에 가장 선명하게 보이는 6개월 뒤 관측 시기를 안내합니다!</p>
-          
-          <div class="zodiac-select-box">
-            <select id="birth-month" onchange="calculateZodiac()">
-              <option value="">월 선택</option>
-            </select>
-            <select id="birth-day" onchange="calculateZodiac()">
-              <option value="">일 선택</option>
-            </select>
-          </div>
-
-          <div id="zodiac-result-display">
-            <p style="text-align:center; color:#888; font-size:0.88rem; padding:20px 0;">생일을 선택해주세요 🔭</p>
-          </div>
-
-          <div class="reason-box">
-            <h4>❓ 왜 생일날 내 별자리를 못 볼까요?</h4>
-            <p>
-              '탄생 별자리'는 태어난 날 <strong>태양이 위치한 별자리</strong>입니다. 생일 무렵에는 태양과 같은 방향에 떠 있어 <strong>낮에는 햇빛에 가려지고</strong>, 밤에는 지평선 아래로 내려가 볼 수 없습니다.<br><br>
-              내 별자리는 생일로부터 <strong>약 6개월 뒤 밤 22시경</strong> 남쪽 하늘에서 가장 또렷하게 보입니다!
-            </p>
-          </div>
-        </div>
-
-        <div id="side-legend" style="display: none;">
-          <div class="section-title">📖 황도 12궁 별자리 전설</div>
-          <p style="font-size:0.85rem; color:var(--text-sub); margin-bottom:12px;">원하는 별자리를 선택하고 전설 이야기를 직접 추가하거나 작성해 보세요!</p>
-          
-          <div class="legend-form">
-            <label style="font-size:0.82rem; font-weight:bold; color:var(--accent-yellow);">별자리 선택</label>
-            <select id="legend-zodiac-select" onchange="loadLegendContent()">
-            </select>
-
-            <label style="font-size:0.82rem; font-weight:bold; color:var(--accent-yellow); margin-top:10px; display:block;">소제목</label>
-            <input type="text" id="legend-title" placeholder="예: 그리스 신화 속 영웅의 이야기">
-
-            <label style="font-size:0.82rem; font-weight:bold; color:var(--accent-yellow); margin-top:10px; display:block;">전설 이야기 내용</label>
-            <textarea id="legend-body" placeholder="별자리에 얽힌 전설 내용을 여기에 자유롭게 입력하세요."></textarea>
-
-            <button class="action-btn btn-upload" onclick="saveLegendContent()">💾 저장하기</button>
-          </div>
-
-          <div id="legend-display-card" class="legend-card">
-            <h4 id="display-legend-title">선택된 별자리 전설</h4>
-            <p id="display-legend-body">등록된 전설 이야기가 없습니다. 위에서 직접 내용을 작성하고 저장해 보세요!</p>
-          </div>
-        </div>
-
-        <div id="side-search" style="display: none;">
-          <input type="text" class="search-input" id="search-input" placeholder="🔎 화성, 목성, 오리온자리..." oninput="filterSearch()">
-          <div id="search-results"></div>
-        </div>
-
-        <div id="side-study" style="display: none;">
-          <div class="search-card" style="border-color:var(--accent-blue);">
-            <h4>♀️ 밤 22시 조건과 금성 관측</h4>
-            <p style="margin-top:6px;">본 웹앱은 통제변인으로 관측 시각을 <strong>22:00</strong>로 고정하였기 때문에, 대표적 내행성인 <strong>금성은 지평선 아래로 침강하여 관측 대상에서 제외</strong>하였습니다. 22:00 조건에서는 외행성(화성, 목성, 토성 등) 중심으로 관측 가이드를 구성하였습니다.</p>
-          </div>
-          <div class="search-card">
-            <h4>☀️ 생일날 탄생 별자리가 안 보이는 이유</h4>
-            <p style="margin-top:6px;">태양이 1년 동안 지나는 길(황도) 상에서 내 생일날 태양이 바로 그 별자리를 지나고 있기 때문입니다.</p>
-          </div>
-          <div class="search-card">
-            <h4>📐 길잡이별이란?</h4>
-            <p style="margin-top:6px;">밝게 빛나며 다른 별자리를 찾을 수 있게 기준이 되는 대표 별들입니다.</p>
-          </div>
-        </div>
-
       </div>
     </div>
 
-    <div class="main-viewport" id="main-viewport">
-      
-      <div id="sky-image-container"></div>
+    <div class="main-viewport">
+      <h2 style="color:var(--accent-yellow); margin-top:0;">📋 배포용(index.html)에 붙여넣을 코드</h2>
+      <p style="color:var(--text-sub); font-size:0.9rem;">아래 [코드 복사] 버튼을 누른 후, GitHub의 <code>index.html</code> 파일 안 <code>const zodiacList = [ ... ];</code> 자리에 그대로 덮어씌워주세요!</p>
 
-      <div class="info-overlay">
-        <h3 id="card-title">주요 관측 천체</h3>
-        <p id="card-desc">설명이 여기에 표시됩니다.</p>
-      </div>
+      <button class="action-btn btn-copy" onclick="copyCode()" style="margin-bottom:14px; width:220px;">📋 배포용 코드 전체 복사</button>
 
+      <div class="code-output-box" id="code-output"></div>
     </div>
-
   </div>
 
   <script>
-    const monthsData = [
-      { year: 2026, month: 8, mainStar: '여름철 대삼각형, 물병자리 유성우', desc: '밤하늘 높은 여름철 대삼각형과 동남쪽의 유성우, 지평선에 낮게 뜬 달을 볼 수 있습니다.' },
-      { year: 2026, month: 9, mainStar: '가을철 대사각형, 토성·해왕성', desc: '동쪽 밤하늘의 큰 페가수스 사각형 주변으로 토성, 해왕성과 가을철 별자리들이 나타납니다.' },
-      { year: 2026, month: 10, mainStar: '플레이아데스 성단, 천왕성, 알데바란', desc: '동쪽 하늘 카펠라와 알데바란 사이로 푸른빛의 성단과 천왕성이 선명하게 관측됩니다.' },
-      { year: 2026, month: 11, mainStar: '겨울철 길잡이 별(베텔게우스·리겔)', desc: '황소자리의 알데바란과 오리온자리의 베텔게우스, 리겔 등 화려한 겨울철 별들이 떠오릅니다.' },
-      { year: 2026, month: 12, mainStar: '오리온자리 & 겨울철 대삼각형', desc: '남쪽 하늘 정중앙에 오리온자리와 겨울철 대삼각형이 또렷합니다.' },
-      { year: 2027, month: 1, mainStar: '오리온자리 & 겨울철 대삼각형', desc: '남쪽 하늘 정중앙에 오리온자리와 겨울철 대삼각형이 또렷합니다.' },
-      { year: 2027, month: 2, mainStar: '큰개자리 시리우스', desc: '밤하늘에서 가장 밝게 빛나는 으뜸별 시리우스를 관측할 수 있습니다.' },
-      { year: 2027, month: 3, mainStar: '봄의 대삼각형, 목성·토성', desc: '넓게 펼쳐진 봄의 대삼각형 위쪽으로 밝은 목성과 토성이 나란히 빛납니다.' },
-      { year: 2027, month: 4, mainStar: '봄의 대삼각형, 화성·목성·달', desc: '남쪽의 봄의 대삼각형과 함께 서쪽 하늘에 모여 밝게 빛나는 화성, 목성, 달을 관측할 수 있습니다.' },
-      { year: 2027, month: 5, mainStar: '봄의 대삼각형, 베가(직녀성)', desc: '남동쪽 높은 봄의 대삼각형과 함께 동쪽 지평선에서 여름의 시작을 알리는 베가가 새로 보이기 시작합니다.' },
-      { year: 2027, month: 6, mainStar: '여름철 대삼각형, 북극성', desc: '북동쪽 높이 선명한 여름철 대삼각형이 걸리고 왼쪽 하늘에서 북극성과 북쪽 별자리들이 빛납니다.' },
-      { year: 2027, month: 7, mainStar: '여름철 대삼각형, 염소자리 알파 유성우', desc: '동쪽 하늘 중앙의 웅장한 여름철 대삼각형 아래로 유성우와 가을 별자리들이 조화를 이룹니다.' }
+    let zodiacList = [
+      { name: "양자리 ♈", dateRange: "3월 21일 ~ 4월 19일", bestMonthIdx: 2, bestMonthText: "2026년 10월", skyDirection: "남쪽 높은 하늘", desc: "생일인 봄철 대신 가을 밤 22시경 남쪽 높은 하늘에서 빛납니다.", legend: "계모의 구박을 받던 헬레와 프릭소스 남매를 구하기 위해 제우스가 보낸 황금 털을 가진 날개 달린 양의 신화입니다." },
+      { name: "황소자리 ♉", dateRange: "4월 20일 ~ 5월 20일", bestMonthIdx: 3, bestMonthText: "2026년 11월", skyDirection: "동쪽~남동쪽 하늘", desc: "생일에서 6개월 뒤인 11월 밤, 알데바란과 플레이아데스 성단이 또렷합니다.", legend: "신들의 왕 제우스가 아름다운 공주 에우로파에게 반해 흰 황소로 변신하여 바다를 건넌 사랑의 이야기입니다." },
+      { name: "쌍둥이자리 ♊", dateRange: "5월 21일 ~ 6월 21일", bestMonthIdx: 4, bestMonthText: "2026년 12월", skyDirection: "동쪽 높은 하늘", desc: "여름철 낮 하늘에 숨었던 형제별이 12월 겨울 밤하늘을 수놓습니다.", legend: "우애가 깊었던 카스토르와 폴룩스 형제 이야기입니다. 카스토르가 죽자 폴룩스가 영생을 나누어 주어 별자리가 되었습니다." },
+      { name: "게자리 ♋", dateRange: "6월 22일 ~ 7월 22일", bestMonthIdx: 5, bestMonthText: "2027년 1월", skyDirection: "남동쪽 하늘", desc: "한여름 생일날과 반대편인 1월 한겨울 밤 22시에 프레세페 성단이 나타납니다.", legend: "영웅 헤라클레스와 히드라의 전투 때, 히드라를 도우려다 헤라클레스의 발에 밟힌 불쌍한 게를 헤라 여신이 하늘에 올린 전설입니다." },
+      { name: "사자자리 ♌", dateRange: "7월 23일 ~ 8월 22일", bestMonthIdx: 6, bestMonthText: "2027년 2월", skyDirection: "동쪽~남동쪽 하늘", desc: "8월 태양 빛에 가려지던 사자자리가 2월 밤에 장관을 이룹니다.", legend: "헤라클레스가 12가지 과업 중 첫 번째로 싸워 이겨낸 네메아 계곡의 식인 사자 신화입니다." },
+      { name: "처녀자리 ♍", dateRange: "8월 23일 ~ 9월 22일", bestMonthIdx: 7, bestMonthText: "2027년 3월", skyDirection: "동쪽 하늘", desc: "가을 생일 대신 6개월 뒤인 3월 봄 밤하늘에서 스피카 별을 볼 수 있습니다.", legend: "풍요의 여신 데메테르의 딸 페르세포네가 저승의 왕 하데스에게 납치되었다가 돌아오는 봄의 계절 신화입니다." },
+      { name: "천칭자리 ♎", dateRange: "9월 23일 ~ 10월 22일", bestMonthIdx: 8, bestMonthText: "2027년 4월", skyDirection: "남동쪽 낮은 하늘", desc: "10월 밤에는 안 보이지만 6개월 뒤인 4월 밤 22시경 떠오릅니다.", legend: "정의의 여신 아스트라이아가 인간의 선함과 악함을 공정하게 저울질할 때 사용하던 정의의 저울입니다." },
+      { name: "전갈자리 ♏", dateRange: "10월 23일 ~ 11월 22일", bestMonthIdx: 9, bestMonthText: "2027년 5월", skyDirection: "남동쪽 지평선", desc: "11월의 반대편인 5월 초여름 밤 남쪽 하늘에서 안타레스가 붉게 빛납니다.", legend: "자만한 사냥꾼 오리온을 벌하기 위해 헤라 여신이 보낸 독전갈 신화입니다." },
+      { name: "사수자리 ♐", dateRange: "11월 23일 ~ 12월 21일", bestMonthIdx: 10, bestMonthText: "2027년 6월", skyDirection: "남쪽 지평선 낮게", desc: "겨울철 태양 뒤에 숨어 있다가 6개월 뒤인 6월 여름 밤 은하수와 함께 보입니다.", legend: "인류에게 의술과 학문을 가르친 반인반마 켄타우로스족의 현자 케이론의 신화입니다." },
+      { name: "염소자리 ♑", dateRange: "12월 22일 ~ 1월 19일", bestMonthIdx: 11, bestMonthText: "2027년 7월", skyDirection: "남동쪽 하늘", desc: "1월 생일 무렵과 정확히 반대인 7월 한여름 밤 22시경 선명하게 관측됩니다.", legend: "목신 판(Pan)이 괴물 티퐁을 피해 물속으로 도망치다 상반신은 염소, 하반신은 물고기로 변한 이야기입니다." },
+      { name: "물병자리 ♒", dateRange: "1월 20일 ~ 2월 18일", bestMonthIdx: 0, bestMonthText: "2026년 8월", skyDirection: "남쪽 하늘", desc: "태양이 물병자리를 지나는 2월의 반대편인 8월 밤 22시에 가장 잘 보입니다.", legend: "신들의 연회장에서 물을 따르는 트로이의 아름다운 소년 가니메데스 전설입니다." },
+      { name: "물고기자리 ♓", dateRange: "2월 19일 ~ 3월 20일", bestMonthIdx: 1, bestMonthText: "2026년 9월", skyDirection: "남쪽 하늘 높은 곳", desc: "태양이 가리는 3월 대신 6개월 뒤인 9월 밤하늘에서 감상할 수 있습니다.", legend: "아프로디테와 에로스 모자가 괴물을 피해 물고기로 변신해 서로를 끈으로 묶은 사랑 이야기입니다." }
     ];
 
-    const zodiacList = [
-      { name: "양자리 ♈", dateRange: "3월 21일 ~ 4월 19일", bestMonthIdx: 2, bestMonthText: "2026년 10월", skyDirection: "남쪽 높은 하늘", desc: "생일인 봄철 대신 가을 밤 22시경 남쪽 높은 하늘에서 빛납니다." },
-      { name: "황소자리 ♉", dateRange: "4월 20일 ~ 5월 20일", bestMonthIdx: 3, bestMonthText: "2026년 11월", skyDirection: "동쪽~남동쪽 하늘", desc: "생일에서 6개월 뒤인 11월 밤, 알데바란과 플레이아데스 성단이 또렷합니다." },
-      { name: "쌍둥이자리 ♊", dateRange: "5월 21일 ~ 6월 21일", bestMonthIdx: 4, bestMonthText: "2026년 12월", skyDirection: "동쪽 높은 하늘", desc: "여름철 낮 하늘에 숨었던 형제별이 12월 겨울 밤하늘을 수놓습니다." },
-      { name: "게자리 ♋", dateRange: "6월 22일 ~ 7월 22일", bestMonthIdx: 5, bestMonthText: "2027년 1월", skyDirection: "남동쪽 하늘", desc: "한여름 생일날과 반대편인 1월 한겨울 밤 22시에 프레세페 성단이 나타납니다." },
-      { name: "사자자리 ♌", dateRange: "7월 23일 ~ 8월 22일", bestMonthIdx: 6, bestMonthText: "2027년 2월", skyDirection: "동쪽~남동쪽 하늘", desc: "8월 태양 빛에 가려지던 사자자리가 2월 밤에 장관을 이룹니다." },
-      { name: "처녀자리 ♍", dateRange: "8월 23일 ~ 9월 22일", bestMonthIdx: 7, bestMonthText: "2027년 3월", skyDirection: "동쪽 하늘", desc: "가을 생일 대신 6개월 뒤인 3월 봄 밤하늘에서 스피카 별을 볼 수 있습니다." },
-      { name: "천칭자리 ♎", dateRange: "9월 23일 ~ 10월 22일", bestMonthIdx: 8, bestMonthText: "2027년 4월", skyDirection: "남동쪽 낮은 하늘", desc: "10월 밤에는 안 보이지만 6개월 뒤인 4월 밤 22시경 떠오릅니다." },
-      { name: "전갈자리 ♏", dateRange: "10월 23일 ~ 11월 22일", bestMonthIdx: 9, bestMonthText: "2027년 5월", skyDirection: "남동쪽 지평선", desc: "11월의 반대편인 5월 초여름 밤 남쪽 하늘에서 안타레스가 붉게 빛납니다." },
-      { name: "사수자리 ♐", dateRange: "11월 23일 ~ 12월 21일", bestMonthIdx: 10, bestMonthText: "2027년 6월", skyDirection: "남쪽 지평선 낮게", desc: "겨울철 태양 뒤에 숨어 있다가 6개월 뒤인 6월 여름 밤 은하수와 함께 보입니다." },
-      { name: "염소자리 ♑", dateRange: "12월 22일 ~ 1월 19일", bestMonthIdx: 11, bestMonthText: "2027년 7월", skyDirection: "남동쪽 하늘", desc: "1월 생일 무렵과 정확히 반대인 7월 한여름 밤 22시경 선명하게 관측됩니다." },
-      { name: "물병자리 ♒", dateRange: "1월 20일 ~ 2월 18일", bestMonthIdx: 0, bestMonthText: "2026년 8월", skyDirection: "남쪽 하늘", desc: "태양이 물병자리를 지나는 2월의 반대편인 8월 밤 22시에 가장 잘 보입니다." },
-      { name: "물고기자리 ♓", dateRange: "2월 19일 ~ 3월 20일", bestMonthIdx: 1, bestMonthText: "2026년 9월", skyDirection: "남쪽 하늘 높은 곳", desc: "태양이 가리는 3월 대신 6개월 뒤인 9월 밤하늘에서 감상할 수 있습니다." }
-    ];
-
-    const starDatabase = [
-      { name: "화성 ♂ (Mars)", type: "행성", desc: "붉은빛을 띠는 태양계 4번째 행성입니다.", period: "📅 추천 관측: 12월 ~ 2월", monthIdx: 4 },
-      { name: "목성 ♃ (Jupiter)", type: "행성", desc: "태양계에서 가장 큰 거대 가스 행성입니다.", period: "📅 추천 관측: 2월 ~ 4월", monthIdx: 7 },
-      { name: "토성 ♄ (Saturn)", type: "행성", desc: "아름다운 얼음 고리를 가지고 있습니다.", period: "📅 추천 관측: 8월 ~ 10월", monthIdx: 1 },
-      { name: "오리온자리", type: "별자리", desc: "겨울철 남쪽 하늘의 대표 사각형 별자리입니다.", period: "📅 추천 관측: 12월 ~ 2월", monthIdx: 5 }
-    ];
-
-    let currentMonthIdx = 0;
-    let currentLayer = 'basic';
-    let db = null;
-
-    function initDB() {
-      return new Promise((resolve, reject) => {
-        const request = indexedDB.open("StarAppDB", 2);
-        request.onupgradeneeded = (e) => {
-          const db = e.target.result;
-          if (!db.objectStoreNames.contains("images")) {
-            db.createObjectStore("images");
-          }
-          if (!db.objectStoreNames.contains("legends")) {
-            db.createObjectStore("legends");
-          }
-        };
-        request.onsuccess = (e) => {
-          db = e.target.result;
-          resolve(db);
-        };
-        request.onerror = (e) => reject(e);
-      });
-    }
-
-    function saveImageToDB(key, dataUrl) {
-      return new Promise((resolve) => {
-        if (!db) return resolve();
-        const tx = db.transaction("images", "readwrite");
-        const store = tx.objectStore("images");
-        store.put(dataUrl, key);
-        tx.oncomplete = () => resolve();
-      });
-    }
-
-    function getImageFromDB(key) {
-      return new Promise((resolve) => {
-        if (!db) return resolve(null);
-        const tx = db.transaction("images", "readonly");
-        const store = tx.objectStore("images");
-        const req = store.get(key);
-        req.onsuccess = () => resolve(req.result || null);
-        req.onerror = () => resolve(null);
-      });
-    }
-
-    function deleteImageFromDB(key) {
-      return new Promise((resolve) => {
-        if (!db) return resolve();
-        const tx = db.transaction("images", "readwrite");
-        const store = tx.objectStore("images");
-        store.delete(key);
-        tx.oncomplete = () => resolve();
-      });
-    }
-
-    function saveLegendToDB(zodiacName, title, body) {
-      return new Promise((resolve) => {
-        if (!db) return resolve();
-        const tx = db.transaction("legends", "readwrite");
-        const store = tx.objectStore("legends");
-        store.put({ title, body }, zodiacName);
-        tx.oncomplete = () => resolve();
-      });
-    }
-
-    function getLegendFromDB(zodiacName) {
-      return new Promise((resolve) => {
-        if (!db) return resolve(null);
-        const tx = db.transaction("legends", "readonly");
-        const store = tx.objectStore("legends");
-        const req = store.get(zodiacName);
-        req.onsuccess = () => resolve(req.result || null);
-        req.onerror = () => resolve(null);
-      });
-    }
-
-    window.onload = async () => {
-      try { await initDB(); } catch(e) { console.log("IndexedDB 비활성"); }
-      initZodiacSelects();
-      initLegendSelects();
-      renderMonthGrid();
-      updateView();
-      renderSearchResults(starDatabase);
-      setupSwipeEvents();
-    };
-
-    function initZodiacSelects() {
-      const mSelect = document.getElementById('birth-month');
-      const dSelect = document.getElementById('birth-day');
-      for (let i = 1; i <= 12; i++) {
+    window.onload = () => {
+      const saved = localStorage.getItem('star_admin_zodiac_list');
+      if (saved) { zodiacList = JSON.parse(saved); }
+      
+      const select = document.getElementById('zodiac-select');
+      zodiacList.forEach((z, idx) => {
         const opt = document.createElement('option');
-        opt.value = i; opt.innerText = `${i}월`;
-        mSelect.appendChild(opt);
-      }
-      for (let i = 1; i <= 31; i++) {
-        const opt = document.createElement('option');
-        opt.value = i; opt.innerText = `${i}일`;
-        dSelect.appendChild(opt);
-      }
-    }
-
-    function initLegendSelects() {
-      const select = document.getElementById('legend-zodiac-select');
-      select.innerHTML = '';
-      zodiacList.forEach(z => {
-        const opt = document.createElement('option');
-        opt.value = z.name;
-        opt.innerText = z.name;
+        opt.value = idx; opt.innerText = z.name;
         select.appendChild(opt);
       });
-      loadLegendContent();
+      loadLegend();
+      updateCodeOutput();
+    };
+
+    function loadLegend() {
+      const idx = document.getElementById('zodiac-select').value;
+      document.getElementById('legend-input').value = zodiacList[idx].legend;
     }
 
-    async function loadLegendContent() {
-      const selectedZodiac = document.getElementById('legend-zodiac-select').value;
-      const legendData = await getLegendFromDB(selectedZodiac);
-
-      if (legendData) {
-        document.getElementById('legend-title').value = legendData.title || '';
-        document.getElementById('legend-body').value = legendData.body || '';
-        document.getElementById('display-legend-title').innerText = `${selectedZodiac} : ${legendData.title || '전설 이야기'}`;
-        document.getElementById('display-legend-body').innerText = legendData.body || '내용이 작성되지 않았습니다.';
-      } else {
-        document.getElementById('legend-title').value = '';
-        document.getElementById('legend-body').value = '';
-        document.getElementById('display-legend-title').innerText = `${selectedZodiac}`;
-        document.getElementById('display-legend-body').innerText = '등록된 전설 이야기가 없습니다. 위에서 직접 내용을 작성하고 저장해 보세요!';
-      }
+    function saveLegend() {
+      const idx = document.getElementById('zodiac-select').value;
+      zodiacList[idx].legend = document.getElementById('legend-input').value;
+      localStorage.setItem('star_admin_zodiac_list', JSON.stringify(zodiacList));
+      updateCodeOutput();
+      alert(`✅ [${zodiacList[idx].name}] 전설이 임시 저장되었습니다. 오른쪽에 생성된 코드를 복사하세요!`);
     }
 
-    async function saveLegendContent() {
-      const selectedZodiac = document.getElementById('legend-zodiac-select').value;
-      const title = document.getElementById('legend-title').value;
-      const body = document.getElementById('legend-body').value;
-
-      if (!body.trim()) {
-        alert("전설 이야기를 입력해주세요!");
-        return;
-      }
-
-      await saveLegendToDB(selectedZodiac, title, body);
-      await loadLegendContent();
-      alert(`✅ ${selectedZodiac}의 전설 이야기가 성공적으로 저장되었습니다!`);
+    function updateCodeOutput() {
+      const codeStr = `const zodiacList = ${JSON.stringify(zodiacList, null, 2)};`;
+      document.getElementById('code-output').innerText = codeStr;
     }
 
-    function switchSidebar(tabName, evt) {
-      document.getElementById('side-month').style.display = tabName === 'month' ? 'block' : 'none';
-      document.getElementById('side-zodiac').style.display = tabName === 'zodiac' ? 'block' : 'none';
-      document.getElementById('side-legend').style.display = tabName === 'legend' ? 'block' : 'none';
-      document.getElementById('side-search').style.display = tabName === 'search' ? 'block' : 'none';
-      document.getElementById('side-study').style.display = tabName === 'study' ? 'block' : 'none';
-
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      if(evt) evt.target.classList.add('active');
-    }
-
-    function setLayer(layer, evt) {
-      currentLayer = layer;
-      document.querySelectorAll('.sidebar-layer-btn').forEach(b => b.classList.remove('active'));
-      if(evt) evt.target.classList.add('active');
-      updateView();
-    }
-
-    function renderMonthGrid() {
-      const grid = document.getElementById('month-grid');
-      grid.innerHTML = '';
-      monthsData.forEach((data, idx) => {
-        const btn = document.createElement('button');
-        btn.className = `month-btn ${idx === currentMonthIdx ? 'selected' : ''}`;
-        btn.innerText = `${data.month}월`;
-        btn.onclick = () => { currentMonthIdx = idx; renderMonthGrid(); updateView(); };
-        grid.appendChild(btn);
+    function copyCode() {
+      const codeText = document.getElementById('code-output').innerText;
+      navigator.clipboard.writeText(codeText).then(() => {
+        alert("📋 배포용 자바스크립트 코드가 클립보드에 복사되었습니다!\nGitHub의 index.html 파일 안에 붙여넣으세요.");
       });
-    }
-
-    function calculateZodiac() {
-      const m = parseInt(document.getElementById('birth-month').value);
-      const d = parseInt(document.getElementById('birth-day').value);
-      const display = document.getElementById('zodiac-result-display');
-
-      if (!m || !d) {
-        display.innerHTML = '<p style="text-align:center; color:#888; font-size:0.88rem; padding:20px 0;">월과 일을 모두 선택해주세요 🔭</p>';
-        return;
-      }
-
-      let zIdx = -1;
-      if ((m == 1 && d >= 20) || (m == 2 && d <= 18)) zIdx = 10;
-      else if ((m == 2 && d >= 19) || (m == 3 && d <= 20)) zIdx = 11;
-      else if ((m == 3 && d >= 21) || (m == 4 && d <= 19)) zIdx = 0;
-      else if ((m == 4 && d >= 20) || (m == 5 && d <= 20)) zIdx = 1;
-      else if ((m == 5 && d >= 21) || (m == 6 && d <= 21)) zIdx = 2;
-      else if ((m == 6 && d >= 22) || (m == 7 && d <= 22)) zIdx = 3;
-      else if ((m == 7 && d >= 23) || (m == 8 && d <= 22)) zIdx = 4;
-      else if ((m == 8 && d >= 23) || (m == 9 && d <= 22)) zIdx = 5;
-      else if ((m == 9 && d >= 23) || (m == 10 && d <= 22)) zIdx = 6;
-      else if ((m == 10 && d >= 23) || (m == 11 && d <= 22)) zIdx = 7;
-      else if ((m == 11 && d >= 23) || (m == 12 && d <= 21)) zIdx = 8;
-      else zIdx = 9;
-
-      const z = zodiacList[zIdx];
-
-      display.innerHTML = `
-        <div class="zodiac-result-card">
-          <h3>${z.name}</h3>
-          <span class="zodiac-date-tag">📅 탄생 기간: ${z.dateRange}</span>
-          <p style="font-size:0.88rem; color:#cbd5e1;">${z.desc}</p>
-          
-          <div class="zodiac-obs-info">
-            <strong>🔭 최적 관측 시기 (6개월 뒤 / 22:00 기준)</strong><br>
-            • 추천 월: <span style="color:var(--accent-yellow); font-weight:bold;">${z.bestMonthText}</span><br>
-            • 관측 방향: <span style="color:var(--accent-blue); font-weight:bold;">${z.skyDirection}</span>
-          </div>
-
-          <button class="action-btn btn-upload" onclick="gotoZodiacSky(${z.bestMonthIdx})">
-            🚀 ${z.bestMonthText} 관측 하늘로 이동
-          </button>
-        </div>
-      `;
-    }
-
-    function gotoZodiacSky(monthIdx) {
-      currentMonthIdx = monthIdx;
-      setLayer('zodiac');
-      renderMonthGrid();
-      updateView();
-    }
-
-    async function updateView() {
-      const data = monthsData[currentMonthIdx];
-      document.getElementById('current-time-tag').innerText = `📍 관측 기준(대전시민천문대): ${data.year}. ${data.month < 10 ? '0'+data.month : data.month}. 15 (22:00)`;
-
-      const customKey = `${data.year}_${data.month}_${currentLayer}`;
-      const statusText = document.getElementById('upload-status');
-      const deleteBtn = document.getElementById('delete-btn');
-
-      const userImg = await getImageFromDB(customKey);
-
-      if (userImg) {
-        statusText.innerText = "✅ 수동 등록된 사진이 있습니다.";
-        statusText.style.color = "#4cc9f0";
-        deleteBtn.style.display = "block";
-      } else {
-        statusText.innerText = "📁 images/ 폴더 확인 중...";
-        statusText.style.color = "#cbd5e1";
-        deleteBtn.style.display = "none";
-      }
-
-      renderSkyImage(data, userImg);
-
-      document.getElementById('card-title').innerText = `${data.month}월: ${data.mainStar}`;
-      document.getElementById('card-desc').innerText = data.desc;
-    }
-
-    function renderSkyImage(data, userImg) {
-      const container = document.getElementById('sky-image-container');
-
-      if (userImg) {
-        container.innerHTML = `<img src="${userImg}" class="sky-image" alt="밤하늘 관측도">`;
-        return;
-      }
-
-      const folderPathJPG = `images/${data.year}_${data.month}_${currentLayer}.jpg`;
-      const folderPathPNG = `images/${data.year}_${data.month}_${currentLayer}.png`;
-
-      const testImg = new Image();
-      testImg.src = folderPathJPG;
-      testImg.className = "sky-image";
-
-      testImg.onload = () => {
-        container.innerHTML = '';
-        container.appendChild(testImg);
-        document.getElementById('upload-status').innerText = "📂 images/ 폴더 사진 자동 연동됨";
-        document.getElementById('upload-status').style.color = "#06d6a0";
-      };
-
-      testImg.onerror = () => {
-        const testImgPNG = new Image();
-        testImgPNG.src = folderPathPNG;
-        testImgPNG.className = "sky-image";
-        testImgPNG.onload = () => {
-          container.innerHTML = '';
-          container.appendChild(testImgPNG);
-          document.getElementById('upload-status').innerText = "📂 images/ 폴더 사진 자동 연동됨";
-          document.getElementById('upload-status').style.color = "#06d6a0";
-        };
-        testImgPNG.onerror = () => {
-          const layerNames = { basic: '기본 밤하늘', guides: '길잡이별', zodiac: '황도 12궁' };
-          container.innerHTML = `
-            <div class="no-image-placeholder">
-              <h2 style="color:var(--accent-yellow); margin-bottom:10px;">${data.month}월 [${layerNames[currentLayer]}]</h2>
-              <p>등록된 사진이 없거나 images/${data.year}_${data.month}_${currentLayer}.jpg 파일이 없습니다.</p>
-              <p style="font-size:0.85rem; color:#888; margin-top:6px;">좌측 [개별 사진 수동 등록] 버튼으로 올려보세요!</p>
-            </div>
-          `;
-          document.getElementById('upload-status').innerText = "❌ 등록된 사진 없음";
-          document.getElementById('upload-status').style.color = "#cbd5e1";
-        };
-      };
-    }
-
-    async function uploadCustomImage(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = async function(e) {
-        const data = monthsData[currentMonthIdx];
-        const customKey = `${data.year}_${data.month}_${currentLayer}`;
-        await saveImageToDB(customKey, e.target.result);
-        updateView();
-        alert(`✅ [${data.month}월 - ${currentLayer}] 사진이 성공적으로 저장되었습니다!`);
-      };
-      reader.readAsDataURL(file);
-    }
-
-    async function deleteCustomImage() {
-      const data = monthsData[currentMonthIdx];
-      const customKey = `${data.year}_${data.month}_${currentLayer}`;
-      if (confirm("현재 수동 등록된 사진을 지우시겠습니까?")) {
-        await deleteImageFromDB(customKey);
-        updateView();
-      }
-    }
-
-    function renderSearchResults(items) {
-      const container = document.getElementById('search-results');
-      container.innerHTML = '';
-      items.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'search-card';
-        card.innerHTML = `
-          <h4>${item.name}</h4>
-          <p>${item.desc}</p>
-          <span class="tag">${item.period}</span>
-        `;
-        card.onclick = () => {
-          currentMonthIdx = item.monthIdx;
-          renderMonthGrid();
-          updateView();
-        };
-        container.appendChild(card);
-      });
-    }
-
-    function filterSearch() {
-      const query = document.getElementById('search-input').value.toLowerCase();
-      renderSearchResults(starDatabase.filter(s => s.name.toLowerCase().includes(query) || s.desc.toLowerCase().includes(query)));
-    }
-
-    function setupSwipeEvents() {
-      const viewport = document.getElementById('main-viewport');
-      let startX = 0;
-      let startY = 0;
-      let isDragging = false;
-
-      viewport.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
-      }, { passive: true });
-
-      viewport.addEventListener('touchend', (e) => {
-        if (!startX) return;
-        const endX = e.changedTouches[0].clientX;
-        const endY = e.changedTouches[0].clientY;
-        handleSwipe(startX, startY, endX, endY);
-        startX = 0;
-      }, { passive: true });
-
-      viewport.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        startX = e.clientX;
-        startY = e.clientY;
-      });
-
-      viewport.addEventListener('mouseup', (e) => {
-        if (!isDragging) return;
-        isDragging = false;
-        handleSwipe(startX, startY, e.clientX, e.clientY);
-      });
-    }
-
-    function handleSwipe(startX, startY, endX, endY) {
-      const diffX = endX - startX;
-      const diffY = endY - startY;
-
-      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
-        if (diffX < 0) {
-          if (currentMonthIdx < monthsData.length - 1) {
-            currentMonthIdx++;
-            renderMonthGrid();
-            updateView();
-          }
-        } else {
-          if (currentMonthIdx > 0) {
-            currentMonthIdx--;
-            renderMonthGrid();
-            updateView();
-          }
-        }
-      }
     }
   </script>
 </body>
